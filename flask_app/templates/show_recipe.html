@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/stylesheet.css')}}">
+        <meta charset="UTF-8">
+    <title>Title</title>
+    </head>
+    <body class="text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-9">
+                    <h1>Hello, {{session["user_name"]}}!</h1>
+                </div>
+                <div class="col-1">
+                    <a href="/dashboard">
+                        <button class="btn btn-primary">Dashboard</button>
+                    </a>
+                </div>
+                <div class="col-2">
+                    <form action="/logout" method="post">
+                        <button class="btn btn-primary">Log me out</button>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-9">
+                    <h2>{{recipe.name}}</h2>
+                    <table class="table">
+                        <tr>
+                            <td>Description: </td><td>{{recipe.description}}</td>
+                        </tr>
+                        <tr>
+                            <td>Under 30 Minutes: </td>
+                            <td>
+                                {% if recipe.under_30 == True: %}
+                                    Yes
+                                {% else: %}
+                                    No
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Instructions: </td><td>{{recipe.instructions}}</td>
+                        </tr>
+                        <tr>
+                            <td>Date Made: </td><td>{{recipe.made_on}}</td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

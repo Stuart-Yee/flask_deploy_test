@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/stylesheet.css')}}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body class="text-center">
+<div class="container">
+    <table class="index-table">
+        <tr>
+            <!-- REGISTRATION FORM -->
+            <td class="form-entry">
+                <h2>Registration</h2>
+                <form action="/users/new" method="post">
+                    <div class="form-group">
+                        <input name="first_name" class="form-control" placeholder="First Name">
+                        {% with messages = get_flashed_messages(category_filter=["first_name"]) %}
+
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-danger" role="alert">
+                                        {{message}}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+                    <div class="form-group">
+                        <input name="last_name" class="form-control" placeholder="Last Name">
+                        {% with messages = get_flashed_messages(category_filter=["last_name"]) %}
+
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-danger" role="alert">
+                                        {{message}}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+                    <div class="form-group">
+                        <input name="email" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
+                        {% with messages = get_flashed_messages(category_filter=["email"]) %}
+
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-danger" role="alert">
+                                        {{message}}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+                    <div class="form-group">
+                        <input name="password" type="password" class="form-control" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <input name="password_confirm" type="password" class="form-control" placeholder="Re-Enter Password">
+                        {% with messages = get_flashed_messages(category_filter=["password"]) %}
+
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-danger" role="alert">
+                                        {{message}}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Register</button>
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your info with anyone
+                            else.</small>
+                </form>
+            </td>
+
+            <!-- LOGIN FORM -->
+            <td class="form-entry">
+                <h2>Login</h2>
+                {% with messages = get_flashed_messages(category_filter=["login"]) %}
+
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-danger" role="alert">
+                                {{message}}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <form action="/users/login" method="post">
+                    <div class="form-group">
+                        <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                    </div>
+                    <div class="form-group">
+                        <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

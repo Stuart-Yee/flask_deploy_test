@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/stylesheet.css')}}">
+        <meta charset="UTF-8">
+    <title>Title</title>
+    </head>
+    <body class="text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-9">
+                    <h1>Hello, {{session["user_name"]}}!</h1>
+                </div>
+                <div class="col-1">
+                    <a href="/recipes/new">
+                        <button class="btn btn-primary">Create</button>
+                    </a>
+                </div>
+                <div class="col-2">
+                    <form action="/logout" method="post">
+                        <button class="btn btn-primary">Log me out</button>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-9">
+                    <table class="table">
+                        <thead>
+                            <tr><th>Name</th><th>Under 30 Minutes?</th><th>Actions</th></tr>
+                        </thead>
+                        <tbody>
+                            {% for recipe in recipes: %}
+                                <tr>
+                                    <td>{{recipe.name}}</td>
+                                    <td>
+                                        {% if recipe.under_30 == True: %}
+                                            Yes
+                                        {% else %}
+                                            No
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a href="/recipes/{{recipe.id}}">View Instructions</a>
+                                        {% if session["user_id"] == recipe.user_id: %}
+                                        <a href="/recipes/edit/{{recipe.id}}">Edit</a>
+                                        <a href="/recipes/delete/{{recipe.id}}">Delete</a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-3">
+                </div>
+            </div>
+
+
+        </div>
+    </body>
+</html>
